@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes bash-completion jq
+
+curl -L $(curl -s https://api.github.com/repos/stackrox/kube-linter/releases/latest | jq -r '.assets[] | select(.name|endswith("linux.tar.gz")).browser_download_url') | sudo tar xvz -C /usr/local/bin kube-linter
+
+chown root:root /usr/local/bin/kube-linter
+chmod 0755 /usr/local/bin/kube-linter
+
+kube-linter completion bash > /etc/bash_completion.d/kube-linter

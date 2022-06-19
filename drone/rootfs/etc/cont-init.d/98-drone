@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes jq
+
+curl -L $(curl -s https://api.github.com/repos/harness/drone-cli/releases/latest | jq -r '.assets[] | select(.name|endswith("linux_amd64.tar.gz")).browser_download_url') | tar xvz -C /usr/local/bin drone
+
+chown root:root /usr/local/bin/drone
+chmod 0755 /usr/local/bin/drone

@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes jq
+
+curl -L $(curl -s https://api.github.com/repos/mozilla/sops/releases/latest | jq -r '.assets[] | select(.name|endswith("linux")).browser_download_url') -o /usr/local/bin/sops
+chown root:root /usr/local/bin/sops
+chmod 0755 /usr/local/bin/sops

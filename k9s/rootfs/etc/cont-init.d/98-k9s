@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes jq
+
+curl -L $(curl -s https://api.github.com/repos/derailed/k9s/releases/latest | jq -r '.assets[] | select(.name|endswith("Linux_x86_64.tar.gz")).browser_download_url') | tar xvz -C /usr/local/bin k9s
+
+chown root:root /usr/local/bin/k9s
+chmod 0755 /usr/local/bin/k9s

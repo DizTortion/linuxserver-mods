@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes bash-completion jq make
+
+curl -L $(curl -s https://api.github.com/repos/kubernetes-sigs/kubebuilder/releases/latest | jq -r '.assets[] | select(.name|endswith("linux_amd64")).browser_download_url') -o /usr/local/bin/kubebuilder
+chown root:root /usr/local/bin/kubebuilder
+chmod 0755 /usr/local/bin/kubebuilder
+
+kubebuilder completion bash > /etc/bash_completion.d/kubebuilder

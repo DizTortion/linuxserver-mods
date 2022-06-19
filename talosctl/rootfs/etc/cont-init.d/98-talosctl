@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes jq
+
+curl -L $(curl -s https://api.github.com/repos/siderolabs/talos/releases/latest | jq -r '.assets[] | select(.name|endswith("talosctl-linux-amd64")).browser_download_url') -o /usr/local/bin/talosctl
+chown root:root /usr/local/bin/talosctl
+chmod 0755 /usr/local/bin/talosctl
