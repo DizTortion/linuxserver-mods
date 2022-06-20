@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes bash-completion jq
+
+curl -L $(curl -s https://api.github.com/repos/vmware-tanzu/velero/releases/latest | jq -r '.assets[] | select(.name|endswith("linux-amd64.tar.gz")).browser_download_url') | tar xvz -C /usr/local/bin --strip-components=1 --wildcards */velero
+
+chown root:root /usr/local/bin/velero
+chmod 0755 /usr/local/bin/velero
+
+velero completion bash > /etc/bash_completion.d/velero
