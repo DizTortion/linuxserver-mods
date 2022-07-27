@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+
+apt-get install --assume-yes openssl libssl-dev

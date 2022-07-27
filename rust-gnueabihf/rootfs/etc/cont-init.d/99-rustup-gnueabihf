@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+set -e
+
+rustup target add arm-unknown-linux-gnueabihf
+
+git clone https://github.com/raspberrypi/tools $HOME/rpi_tools
